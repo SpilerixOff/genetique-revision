@@ -17,7 +17,7 @@
     <div class="nav-links">
       <a href="index.html">Menu</a>
       <a href="croisements.html">◀ Croisements</a>
-      <a href="xlie.html">X / daltonisme ▶</a>
+      <a href="xlie.html">X / couleurs ▶</a>
     </div>
   </nav>
 </header>
@@ -29,6 +29,19 @@
         <h1>4. Groupes sanguins ABO et Rh</h1>
         <div class="card-tag">Questions fréquentes en contrôle</div>
       </div>
+
+      <div class="page-progress">
+        <span>Étape 4 sur 6</span>
+        <div class="page-dots">
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+        </div>
+      </div>
+
       <p>
         On regarde d’abord le système <strong>ABO</strong> (A, B, AB, O), puis le facteur
         <strong>Rhésus</strong> (+ ou −).
@@ -36,15 +49,15 @@
 
       <h2 style="font-size:1.02rem;margin-top:.5rem;">Système ABO</h2>
       <p style="font-size:.9rem;color:var(--muted);margin-top:.15rem;">
-        3 allèles possibles : A, B et O. A et B sont dominants sur O.
+        3 allèles possibles : A, B et O. Les allèles A et B sont dominants sur O.
       </p>
 
       <table>
         <tr><th>Groupe</th><th>Génotype(s)</th><th>Antigène(s)</th><th>Anticorps</th></tr>
-        <tr><td>A</td><td>AA ou AO</td><td>A</td><td>Anti‑B</td></tr>
-        <tr><td>B</td><td>BB ou BO</td><td>B</td><td>Anti‑A</td></tr>
+        <tr><td>A</td><td>AA ou AO</td><td>A</td><td>Anti-B</td></tr>
+        <tr><td>B</td><td>BB ou BO</td><td>B</td><td>Anti-A</td></tr>
         <tr><td>AB</td><td>AB</td><td>A et B</td><td>Aucun</td></tr>
-        <tr><td>O</td><td>OO</td><td>Aucun</td><td>Anti‑A et Anti‑B</td></tr>
+        <tr><td>O</td><td>OO</td><td>Aucun</td><td>Anti-A et Anti-B</td></tr>
       </table>
 
       <div class="schema">
@@ -79,9 +92,9 @@
 
         <div class="question-card">
           <div class="question">
-            1) Un père AO (groupe A) et une mère BO (groupe B) peuvent‑ils avoir un enfant de groupe O ?
+            1) Un père AO (groupe A) et une mère BO (groupe B) peuvent-ils avoir un enfant de groupe O ?
           </div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Oui. Croisement AO × BO → possibilité OO, donc groupe O (environ 25&nbsp;%).
           </div>
@@ -91,25 +104,54 @@
           <div class="question">
             2) Un individu de groupe O a quel génotype ?
           </div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Il est OO (deux allèles O).
           </div>
         </div>
       </div>
+
+      <div class="game-block">
+        <div class="game-title">Mini-jeu : groupe sanguin</div>
+        <p>Quel groupe sanguin correspond au génotype AB ?</p>
+        <div class="game-options">
+          <button class="game-btn" data-correct="false">A</button>
+          <button class="game-btn" data-correct="false">B</button>
+          <button class="game-btn" data-correct="true">AB</button>
+          <button class="game-btn" data-correct="false">O</button>
+        </div>
+        <div class="game-feedback"></div>
+      </div>
     </section>
   </main>
 </div>
 <script>
+// Q/R
 document.querySelectorAll('.btn-reponse').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const rep = btn.nextElementSibling;
     const open = rep.classList.contains('show');
     document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
-    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.innerHTML='<span>👁️</span>Afficher la réponse');
     if(!open){
       rep.classList.add('show');
-      btn.textContent='Cacher la réponse';
+      btn.innerHTML='<span>🙈</span>Cacher la réponse';
+    }
+  });
+});
+// Mini-jeu
+const gameBtns = document.querySelectorAll('.game-btn');
+const feedback = document.querySelector('.game-feedback');
+gameBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    gameBtns.forEach(b=>b.classList.remove('correct','wrong'));
+    const correct = btn.dataset.correct === 'true';
+    if(correct){
+      btn.classList.add('correct');
+      feedback.textContent = "✔ AB → groupe sanguin AB.";
+    }else{
+      btn.classList.add('wrong');
+      feedback.textContent = "❌ Regarde le tableau : qui a les deux antigènes A et B ?";
     }
   });
 });

@@ -12,7 +12,7 @@
   <nav class="nav">
     <div class="brand">
       <div class="brand-title">GENETIC LAB</div>
-      <div class="brand-sub">Daltonisme</div>
+      <div class="brand-sub">Gènes sur le X</div>
     </div>
     <div class="nav-links">
       <a href="index.html">Menu</a>
@@ -29,9 +29,22 @@
         <h1>5. Gènes liés au X : cas du daltonisme</h1>
         <div class="card-tag">Différence garçons / filles</div>
       </div>
+
+      <div class="page-progress">
+        <span>Étape 5 sur 6</span>
+        <div class="page-dots">
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot"></div>
+        </div>
+      </div>
+
       <p>
         Certains gènes se trouvent sur le chromosome X. Le daltonisme (vision perturbée des couleurs)
-        est un exemple classique.
+        est un exemple classique. Ici, on ne considère que le gène de la vision des couleurs.
       </p>
 
       <div class="schema">
@@ -67,9 +80,9 @@
 
         <div class="question-card">
           <div class="question">
-            1) Pourquoi le daltonisme est‑il plus fréquent chez les garçons ?
+            1) Pourquoi le daltonisme est-il plus fréquent chez les garçons ?
           </div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Parce qu’ils n’ont qu’un seul X (XY). S’ils reçoivent Xd, ils sont XdY
             et donc daltoniens directement.
@@ -78,27 +91,62 @@
 
         <div class="question-card">
           <div class="question">
-            2) Une fille XDXd est‑elle daltonienne ?
+            2) Une fille XDXd est-elle daltonienne ?
           </div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Non. Elle est porteuse saine : elle voit normalement, mais peut transmettre Xd.
           </div>
         </div>
       </div>
+
+      <div class="game-block">
+        <div class="game-title">Mini-jeu : qui est daltonien ?</div>
+        <p>Choisis les génotypes qui correspondent à une personne daltonienne :</p>
+        <div class="game-options">
+          <button class="game-btn" data-correct="true">XdY</button>
+          <button class="game-btn" data-correct="true">XdXd</button>
+          <button class="game-btn" data-correct="false">XDXd</button>
+          <button class="game-btn" data-correct="false">XDY</button>
+        </div>
+        <div class="game-feedback"></div>
+      </div>
     </section>
   </main>
 </div>
 <script>
+// Q/R
 document.querySelectorAll('.btn-reponse').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const rep = btn.nextElementSibling;
     const open = rep.classList.contains('show');
     document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
-    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.innerHTML='<span>👁️</span>Afficher la réponse');
     if(!open){
       rep.classList.add('show');
-      btn.textContent='Cacher la réponse';
+      btn.innerHTML='<span>🙈</span>Cacher la réponse';
+    }
+  });
+});
+// Mini-jeu (multi réponses possibles)
+const gameBtns = document.querySelectorAll('.game-btn');
+const feedback = document.querySelector('.game-feedback');
+gameBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const correct = btn.dataset.correct === 'true';
+    if(correct){
+      btn.classList.add('correct');
+    }else{
+      btn.classList.add('wrong');
+    }
+    const allCorrect = Array.from(gameBtns).every(b=>{
+      if(b.dataset.correct === 'true') return b.classList.contains('correct');
+      return !b.classList.contains('correct');  // tolère wrong sur faux
+    });
+    if(allCorrect){
+      feedback.textContent = "✔ Bien vu : XdY et XdXd correspondent à des personnes daltoniennes.";
+    }else{
+      feedback.textContent = "Sélectionne tous les génotypes daltoniens, pas seulement un.";
     }
   });
 });

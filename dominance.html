@@ -27,11 +27,24 @@
     <section class="card">
       <div class="card-header">
         <h1>2. Dominant / récessif</h1>
-        <div class="card-tag">Majuscules, minuscules, mélanges</div>
+        <div class="card-tag">Qui “gagne” sur qui ?</div>
       </div>
+
+      <div class="page-progress">
+        <span>Étape 2 sur 6</span>
+        <div class="page-dots">
+          <div class="page-dot active"></div>
+          <div class="page-dot active"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+        </div>
+      </div>
+
       <p>
         On utilise des lettres pour représenter les allèles. Comprendre qui domine qui
-        va t’aider pour tous les exercices.
+        va t’aider pour tous les exercices du chapitre.
       </p>
 
       <div class="simple-grid">
@@ -88,7 +101,7 @@
 
         <div class="question-card">
           <div class="question">1) Un élève a le génotype Bb pour la couleur des yeux. Hétérozygote ou homozygote ?</div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Bb = hétérozygote (deux lettres différentes).
           </div>
@@ -96,25 +109,55 @@
 
         <div class="question-card">
           <div class="question">2) Avec B dominant, b récessif, quel génotype donne des yeux bleus ?</div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Seulement le génotype bb.
           </div>
         </div>
       </div>
+
+      <div class="game-block">
+        <div class="game-title">Mini-jeu : qui est dominant ?</div>
+        <p>Choisis la bonne réponse :</p>
+        <p style="margin-top:.25rem;font-size:.85rem;">
+          « Un individu Bb pour la couleur des yeux aura : »
+        </p>
+        <div class="game-options">
+          <button class="game-btn" data-correct="true">Yeux bruns</button>
+          <button class="game-btn" data-correct="false">Yeux bleus</button>
+        </div>
+        <div class="game-feedback"></div>
+      </div>
     </section>
   </main>
 </div>
 <script>
+// Q/R
 document.querySelectorAll('.btn-reponse').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const rep = btn.nextElementSibling;
     const open = rep.classList.contains('show');
     document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
-    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.innerHTML='<span>👁️</span>Afficher la réponse');
     if(!open){
       rep.classList.add('show');
-      btn.textContent='Cacher la réponse';
+      btn.innerHTML='<span>🙈</span>Cacher la réponse';
+    }
+  });
+});
+// Mini-jeu
+const gameBtns = document.querySelectorAll('.game-btn');
+const feedback = document.querySelector('.game-feedback');
+gameBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    gameBtns.forEach(b=>b.classList.remove('correct','wrong'));
+    const correct = btn.dataset.correct === 'true';
+    if(correct){
+      btn.classList.add('correct');
+      feedback.textContent = "✔ Oui, le dominant (B) s’exprime, donc yeux bruns.";
+    }else{
+      btn.classList.add('wrong');
+      feedback.textContent = "❌ Non, pour avoir les yeux bleus il faudrait bb.";
     }
   });
 });

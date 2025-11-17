@@ -25,12 +25,25 @@
     <a href="index.html" class="back-link"><span>←</span>Retour au menu</a>
     <section class="card">
       <div class="card-header">
-        <h1>1. Les bases à retenir par cœur</h1>
+        <h1>1. Les bases à connaître par cœur</h1>
         <div class="card-tag">Chromosomes • Gènes • Allèles</div>
       </div>
+
+      <div class="page-progress">
+        <span>Étape 1 sur 6</span>
+        <div class="page-dots">
+          <div class="page-dot active"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+          <div class="page-dot"></div>
+        </div>
+      </div>
+
       <p>
-        Ici, tu apprends le vocabulaire que tu vas voir partout dans le chapitre.
-        Lis chaque boîtes puis regarde le petit schéma en dessous.
+        Lis chaque carte, puis le résumé schéma. À la fin, essaie de répondre aux mini questions
+        sans regarder la correction.
       </p>
 
       <div class="simple-grid">
@@ -61,13 +74,13 @@
           </div>
           <ul>
             <li>Ce sont les <strong>différentes versions</strong> d’un même gène.</li>
-            <li>Exemple : pour la couleur des yeux : B = brun, b = bleu.</li>
+            <li>Ex : pour la couleur des yeux : B = brun, b = bleu.</li>
           </ul>
         </article>
 
         <article class="mini-card">
           <div class="mini-title">
-            <span>Génotype / Phénotype</span><span>lettres / apparence</span>
+            <span>Génotype / Phénotype</span><span>lettres / aspect</span>
           </div>
           <ul>
             <li><strong>Génotype</strong> : les lettres (BB, Bb, bb).</li>
@@ -85,8 +98,8 @@
         <div class="qa-title">Mini questions de compréhension</div>
 
         <div class="question-card">
-          <div class="question">1) Combien y a‑t‑il de chromosomes dans une cellule du corps humain ?</div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <div class="question">1) Combien y a-t-il de chromosomes dans une cellule du corps humain ?</div>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             46 chromosomes, soit 23 paires.
           </div>
@@ -94,25 +107,57 @@
 
         <div class="question-card">
           <div class="question">2) Donne un exemple d’information portée par un gène.</div>
-          <button class="btn-reponse">Afficher la réponse</button>
+          <button class="btn-reponse"><span>👁️</span>Afficher la réponse</button>
           <div class="reponse">
             Par exemple : la couleur des yeux, le groupe sanguin, la couleur des cheveux…
           </div>
         </div>
       </div>
+
+      <div class="game-block">
+        <div class="game-title">Mini-jeu : retrouve le bon mot</div>
+        <p>Choisis le bon terme pour compléter la phrase :</p>
+        <p style="margin-top:.25rem;font-size:.85rem;">
+          « Différentes versions d’un même gène : ce sont des … »
+        </p>
+        <div class="game-options">
+          <button class="game-btn" data-correct="false">Chromosomes</button>
+          <button class="game-btn" data-correct="true">Allèles</button>
+          <button class="game-btn" data-correct="false">Phénotypes</button>
+        </div>
+        <div class="game-feedback"></div>
+      </div>
     </section>
   </main>
 </div>
 <script>
+// Q/R
 document.querySelectorAll('.btn-reponse').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const rep = btn.nextElementSibling;
     const open = rep.classList.contains('show');
     document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
-    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.innerHTML='<span>👁️</span>Afficher la réponse');
     if(!open){
       rep.classList.add('show');
-      btn.textContent='Cacher la réponse';
+      btn.innerHTML='<span>🙈</span>Cacher la réponse';
+    }
+  });
+});
+
+// Mini-jeu
+const gameBtns = document.querySelectorAll('.game-btn');
+const feedback = document.querySelector('.game-feedback');
+gameBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    gameBtns.forEach(b=>b.classList.remove('correct','wrong'));
+    const correct = btn.dataset.correct === 'true';
+    if(correct){
+      btn.classList.add('correct');
+      feedback.textContent = "✔ Exact : ce sont des allèles.";
+    }else{
+      btn.classList.add('wrong');
+      feedback.textContent = "❌ Non. Réfléchis : chromosomes ? gène ? allèles ?";
     }
   });
 });
