@@ -2,14 +2,15 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Révisions Génétique – Mobile friendly</title>
+  <title>Génétique – Site Ultime de Révision</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root{
       --bg1:#020617;
-      --bg2:#0f172a;
-      --accent:#fbbf24;
-      --accent2:#f97316;
+      --bg2:#020617;
+      --accent:#38bdf8;
+      --accent2:#a855f7;
+      --accent3:#f97316;
       --card:#020617;
       --card-soft:#020617;
       --text:#f9fafb;
@@ -22,7 +23,7 @@
     html,body{height:100%;}
     body{
       font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(circle at top left,#1e293b,#020617 55%,#020617);
+      background:radial-gradient(circle at top,#0f172a 0,#020617 45%,#000 100%);
       color:var(--text);
       line-height:1.6;
       scroll-behavior:smooth;
@@ -32,34 +33,39 @@
       position:fixed;
       inset:0;
       background:
-        radial-gradient(circle at 0% 0%,rgba(248,250,252,0.08),transparent 55%),
-        radial-gradient(circle at 100% 100%,rgba(248,250,252,0.06),transparent 55%);
+        radial-gradient(circle at 0% 0%,rgba(56,189,248,0.17),transparent 55%),
+        radial-gradient(circle at 100% 100%,rgba(168,85,247,0.16),transparent 55%);
+      mix-blend-mode:screen;
       pointer-events:none;
       z-index:-1;
     }
+
     header{
       position:sticky;
       top:0;
-      z-index:10;
-      backdrop-filter:blur(14px);
+      z-index:20;
+      backdrop-filter:blur(18px);
       background:linear-gradient(120deg,rgba(15,23,42,0.96),rgba(15,23,42,0.96));
       border-bottom:1px solid rgba(148,163,184,0.35);
     }
     .nav{
-      max-width:960px;
+      max-width:1000px;
       margin:0 auto;
-      padding:.55rem .8rem;
+      padding:.55rem .9rem;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:.75rem;
     }
     .logo{
-      font-weight:800;
-      letter-spacing:.08em;
-      font-size:.9rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      font-size:.85rem;
       text-transform:uppercase;
       color:var(--accent);
+    }
+    .logo span{
+      color:var(--accent2);
     }
     .nav-links{
       display:flex;
@@ -68,116 +74,241 @@
       justify-content:flex-end;
     }
     .nav-links a{
-      font-size:.78rem;
-      padding:.26rem .7rem;
+      font-size:.76rem;
+      padding:.22rem .6rem;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
+      border:1px solid rgba(148,163,184,0.8);
       text-decoration:none;
       color:var(--muted);
-      transition:.18s;
-      background:rgba(15,23,42,.9);
+      transition:.16s;
+      background:rgba(15,23,42,.86);
     }
     .nav-links a:hover{
       background:linear-gradient(135deg,var(--accent2),var(--accent));
-      color:#111827;
+      color:#020617;
       border-color:transparent;
       transform:translateY(-1px);
     }
 
     main{
-      max-width:960px;
-      margin:.9rem auto 2.4rem;
-      padding:0 .8rem 2rem;
+      max-width:1000px;
+      margin:.9rem auto 3rem;
+      padding:0 .9rem 2.5rem;
     }
+
     .hero{
-      background:linear-gradient(145deg,rgba(248,250,252,0.09),rgba(248,250,252,0.03));
-      border-radius:18px;
-      padding:1.1rem .9rem .9rem;
-      box-shadow:0 18px 40px rgba(15,23,42,0.9);
       position:relative;
       overflow:hidden;
-      animation:fadeUp .8s ease-out;
+      border-radius:22px;
+      padding:1.2rem 1rem 1.1rem;
+      background:
+        radial-gradient(circle at 0% 0%,rgba(56,189,248,0.28),transparent 55%),
+        radial-gradient(circle at 100% 100%,rgba(168,85,247,0.28),transparent 55%),
+        linear-gradient(135deg,rgba(15,23,42,0.96),rgba(15,23,42,0.95));
+      box-shadow:0 22px 70px rgba(0,0,0,0.9);
+      animation:fadeDown .9s ease-out;
     }
-    .hero::after{
-      content:"ADN";
+    .hero-orbit{
       position:absolute;
-      right:-18px;
-      bottom:-54px;
-      font-size:5rem;
-      font-weight:900;
-      letter-spacing:.25em;
-      opacity:0.05;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 20%,rgba(248,250,252,0.18),transparent 60%),
+        radial-gradient(circle at 80% 80%,rgba(248,250,252,0.14),transparent 60%);
+      mix-blend-mode:soft-light;
+      opacity:.4;
+      pointer-events:none;
     }
-    .badge{
+    .badge-top{
       display:inline-flex;
       align-items:center;
-      gap:.3rem;
-      padding:.18rem .6rem;
+      gap:.4rem;
+      padding:.22rem .7rem;
       border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      border:1px solid rgba(148,163,184,0.7);
-      font-size:.75rem;
-      margin-bottom:.6rem;
+      border:1px solid rgba(15,23,42,0.9);
+      background:rgba(15,23,42,0.9);
+      font-size:.8rem;
+      position:relative;
+      z-index:1;
     }
-    .badge span:last-child{
+    .badge-dot{
+      width:.55rem;
+      height:.55rem;
+      border-radius:999px;
+      background:radial-gradient(circle,var(--accent),var(--accent2));
+      box-shadow:0 0 14px rgba(56,189,248,0.9);
+    }
+    .badge-top span:last-child{
       color:var(--accent);
       font-weight:600;
     }
     .hero h1{
-      font-size:1.6rem;
-      margin-bottom:.3rem;
+      margin-top:.5rem;
+      font-size:1.8rem;
+      line-height:1.25;
+      position:relative;
+      z-index:1;
     }
-    .hero p{
-      font-size:.95rem;
-      color:var(--muted);
-      max-width:640px;
-    }
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.35rem;
-      margin-top:.6rem;
-    }
-    .chip{
-      font-size:.78rem;
-      padding:.18rem .6rem;
-      border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      border:1px solid rgba(148,163,184,0.7);
-      color:var(--muted2);
-    }
-
-    section{margin-top:1rem;}
-    .card{
-      background:var(--card-soft);
-      border-radius:16px;
-      padding:.9rem .8rem .85rem;
-      border:1px solid rgba(30,64,175,0.7);
-      box-shadow:0 14px 34px rgba(15,23,42,0.9);
-      opacity:0;
-      transform:translateY(22px);
-      transition:opacity .6s ease,transform .6s ease;
-    }
-    .card.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-    .card h2{
-      font-size:1.2rem;
-      margin-bottom:.2rem;
+    .hero h1 span.grad{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       -webkit-background-clip:text;
       color:transparent;
     }
-    .card h3{
-      font-size:.98rem;
-      margin-top:.6rem;
-      margin-bottom:.15rem;
-      color:var(--accent);
+    .hero p{
+      margin-top:.4rem;
+      font-size:.95rem;
+      color:var(--muted);
+      max-width:640px;
+      position:relative;
+      z-index:1;
+    }
+    .hero-strip{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.4rem;
+      margin-top:.8rem;
+      position:relative;
+      z-index:1;
+    }
+    .hero-chip{
+      font-size:.75rem;
+      padding:.18rem .6rem;
+      border-radius:999px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.8);
+      color:var(--muted2);
+    }
+
+    .mode-toggle{
+      margin-top:.9rem;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      font-size:.8rem;
+      color:var(--muted);
+      position:relative;
+      z-index:1;
+    }
+    .mode-pill{
+      display:inline-flex;
+      padding:.18rem;
+      border-radius:999px;
+      background:rgba(15,23,42,0.96);
+      border:1px solid rgba(148,163,184,0.85);
+      gap:.15rem;
+    }
+    .mode-btn{
+      border:none;
+      border-radius:999px;
+      padding:.18rem .7rem;
+      font-size:.78rem;
+      cursor:pointer;
+      background:transparent;
+      color:var(--muted2);
+      transition:.14s;
+    }
+    .mode-btn.active{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#020617;
+      font-weight:600;
+    }
+
+    .progress{
+      margin-top:.7rem;
+      width:100%;
+      height:.35rem;
+      border-radius:999px;
+      background:rgba(15,23,42,0.85);
+      overflow:hidden;
+      position:relative;
+      z-index:1;
+    }
+    .progress-bar{
+      height:100%;
+      width:12%;
+      background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+      background-size:200% 100%;
+      animation:progressGlow 2.5s linear infinite;
+    }
+
+    section{margin-top:1.1rem;}
+    .card{
+      background:radial-gradient(circle at top,rgba(30,64,175,0.35),transparent 55%),
+                 rgba(15,23,42,0.98);
+      border-radius:18px;
+      padding:1rem .9rem .9rem;
+      border:1px solid rgba(30,64,175,0.7);
+      box-shadow:0 18px 45px rgba(0,0,0,0.9);
+      opacity:0;
+      transform:translateY(24px) scale(.98);
+      transition:opacity .6s ease,transform .6s ease;
+    }
+    .card.visible{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+    .card-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.5rem;
+      margin-bottom:.35rem;
+    }
+    .card-title{
+      display:flex;
+      align-items:center;
+      gap:.55rem;
+    }
+    .title-badge{
+      width:1.7rem;
+      height:1.7rem;
+      border-radius:.9rem;
+      background:radial-gradient(circle,var(--accent2),var(--accent));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.9rem;
+      color:#020617;
+      box-shadow:0 0 18px rgba(56,189,248,0.8);
+    }
+    .card h2{
+      font-size:1.1rem;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .card-tag{
+      font-size:.7rem;
+      padding:.15rem .6rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.8);
+      color:var(--muted2);
     }
     .card p{
       font-size:.9rem;
       color:var(--muted);
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:.7rem;
+      margin-top:.4rem;
+    }
+    .mini-card{
+      background:rgba(15,23,42,0.96);
+      border-radius:12px;
+      padding:.6rem .7rem;
+      border:1px solid rgba(51,65,85,0.9);
+      font-size:.88rem;
+    }
+    .tag{
+      font-size:.72rem;
+      display:inline-block;
+      padding:.1rem .45rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.9);
+      color:var(--accent);
+      margin-bottom:.2rem;
     }
     ul{
       margin-left:1.1rem;
@@ -186,35 +317,13 @@
       color:var(--muted);
     }
     li{margin-bottom:.16rem;}
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:.6rem;
-      margin-top:.35rem;
-    }
-    .mini-card{
-      background:var(--card);
-      border-radius:12px;
-      padding:.55rem .6rem;
-      border:1px solid rgba(51,65,85,0.95);
-      font-size:.88rem;
-    }
-    .tag{
-      font-size:.72rem;
-      display:inline-block;
-      padding:.1rem .44rem;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.9);
-      color:var(--accent);
-      margin-bottom:.2rem;
-    }
 
     .question-card{
-      margin-top:.5rem;
-      padding:.5rem .6rem .45rem;
+      margin-top:.55rem;
+      padding:.55rem .65rem .5rem;
       border-radius:12px;
-      background:var(--card);
-      border:1px solid rgba(51,65,85,0.95);
+      background:rgba(15,23,42,0.98);
+      border:1px solid rgba(55,65,81,0.95);
     }
     .question{
       font-size:.9rem;
@@ -225,24 +334,24 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:130px;
-      padding:.26rem .8rem;
+      min-width:150px;
+      padding:.28rem .9rem;
       border-radius:999px;
       border:none;
       cursor:pointer;
-      background:linear-gradient(135deg,var(--accent2),var(--accent));
-      color:#111827;
+      background:linear-gradient(135deg,var(--accent2),var(--accent3));
+      color:#020617;
       font-size:.8rem;
       font-weight:600;
-      box-shadow:0 10px 26px rgba(15,23,42,1);
-      transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
+      box-shadow:0 12px 32px rgba(0,0,0,1);
+      transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
     }
     .btn-reponse:active{
-      transform:translateY(1px);
-      box-shadow:0 7px 18px rgba(15,23,42,1);
+      transform:translateY(1px) scale(.99);
+      box-shadow:0 7px 20px rgba(0,0,0,1);
     }
     .reponse{
-      margin-top:.35rem;
+      margin-top:.38rem;
       font-size:.86rem;
       color:var(--muted);
       max-height:0;
@@ -260,51 +369,49 @@
     table{
       width:100%;
       border-collapse:collapse;
-      margin-top:.35rem;
+      margin-top:.4rem;
       font-size:.86rem;
     }
     th,td{
-      padding:.3rem .3rem;
+      padding:.3rem .35rem;
       border:1px solid rgba(51,65,85,0.9);
       text-align:center;
     }
     th{
-      background:rgba(15,23,42,0.95);
+      background:rgba(15,23,42,0.96);
       font-weight:600;
     }
-
     .punnett{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       border-radius:10px;
       overflow:hidden;
       border:1px solid rgba(51,65,85,0.9);
-      margin-top:.3rem;
+      margin-top:.35rem;
       font-size:.86rem;
       text-align:center;
     }
     .punnett div{
       padding:.3rem .2rem;
-      background:var(--card);
+      background:rgba(15,23,42,0.98);
       border:1px solid rgba(51,65,85,0.9);
     }
     .punnett .header{
-      background:linear-gradient(135deg,rgba(248,250,252,0.15),rgba(248,250,252,0.04));
+      background:linear-gradient(135deg,rgba(56,189,248,0.32),rgba(168,85,247,0.25));
       font-weight:600;
     }
 
-    /* QUIZ */
     .quiz-intro{
-      margin-bottom:.35rem;
+      margin-bottom:.4rem;
       font-size:.9rem;
       color:var(--muted);
     }
     .quiz-question{
       margin-top:.5rem;
-      padding:.5rem .6rem .55rem;
+      padding:.52rem .65rem .6rem;
       border-radius:12px;
-      background:var(--card);
-      border:1px solid rgba(51,65,85,0.95);
+      background:rgba(15,23,42,0.98);
+      border:1px solid rgba(55,65,81,0.95);
     }
     .quiz-question h4{
       font-size:.9rem;
@@ -314,57 +421,61 @@
       display:flex;
       flex-direction:column;
       gap:.25rem;
-      margin-top:.15rem;
+      margin-top:.18rem;
     }
     .quiz-option{
       border-radius:999px;
       border:1px solid rgba(75,85,99,0.95);
-      padding:.23rem .6rem;
+      padding:.25rem .7rem;
       font-size:.86rem;
       cursor:pointer;
-      background:rgba(15,23,42,0.95);
+      background:rgba(15,23,42,0.98);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      transition:.15s;
+      transition:.14s;
     }
     .quiz-option span{pointer-events:none;}
     .quiz-option.correct{
-      background:rgba(22,163,74,0.18);
+      background:rgba(22,163,74,0.2);
       border-color:var(--good);
     }
     .quiz-option.wrong{
-      background:rgba(220,38,38,0.18);
+      background:rgba(220,38,38,0.2);
       border-color:var(--bad);
+    }
+    .quiz-option.selected:not(.correct):not(.wrong){
+      border-color:rgba(248,250,252,0.8);
+      box-shadow:0 0 12px rgba(148,163,184,0.7);
     }
     .quiz-footer{
       display:flex;
       align-items:center;
       justify-content:space-between;
       margin-top:.6rem;
-      padding-top:.45rem;
-      border-top:1px dashed rgba(55,65,81,0.95);
+      padding-top:.5rem;
+      border-top:1px dashed rgba(75,85,99,0.95);
       font-size:.86rem;
       color:var(--muted2);
     }
     .btn-quiz{
-      padding:.3rem .85rem;
+      padding:.3rem .9rem;
       border-radius:999px;
       border:none;
       cursor:pointer;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#111827;
-      font-weight:600;
+      color:#020617;
+      font-weight:700;
       font-size:.82rem;
-      box-shadow:0 10px 26px rgba(15,23,42,1);
-      transition:.15s;
+      box-shadow:0 12px 32px rgba(0,0,0,1);
+      transition:.16s;
     }
     .btn-quiz:active{
-      transform:translateY(1px);
-      box-shadow:0 7px 18px rgba(15,23,42,1);
+      transform:translateY(1px) scale(.99);
+      box-shadow:0 8px 22px rgba(0,0,0,1);
     }
     .score{
-      font-weight:600;
+      font-weight:700;
     }
     .score.good{color:var(--good);}
     .score.bad{color:var(--bad);}
@@ -373,42 +484,41 @@
       font-size:.8rem;
       text-align:center;
       color:var(--muted2);
-      opacity:.85;
+      opacity:.9;
     }
 
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(22px);}
-      to{opacity:1;transform:translateY(0);}
+    @keyframes fadeDown{
+      from{opacity:0;transform:translateY(-10px) scale(.98);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+    @keyframes progressGlow{
+      0%{background-position:0 0;}
+      100%{background-position:200% 0;}
     }
 
-    @media (max-width:640px){
+    @media (max-width:720px){
       .nav{
         flex-direction:column;
         align-items:flex-start;
-        gap:.4rem;
+        gap:.45rem;
       }
       .nav-links{
-        width:100%;
         justify-content:flex-start;
         flex-wrap:wrap;
       }
-      .nav-links a{
-        font-size:.76rem;
-        padding:.22rem .55rem;
-      }
       main{
-        padding:0 .6rem 2rem;
+        padding:0 .7rem 2.5rem;
       }
       .hero{
-        padding:1rem .8rem .8rem;
+        padding:1rem .8rem .9rem;
       }
       .hero h1{
-        font-size:1.4rem;
+        font-size:1.45rem;
       }
       .card{
-        padding:.85rem .7rem .8rem;
+        padding:.9rem .75rem .85rem;
       }
-      table, .punnett{
+      table,.punnett{
         font-size:.8rem;
       }
     }
@@ -418,14 +528,14 @@
 <div class="overlay"></div>
 <header>
   <nav class="nav">
-    <div class="logo">GÉNÉTIQUE</div>
+    <div class="logo">GENETIC<span>LAB</span></div>
     <div class="nav-links">
       <a href="#bases">Bases</a>
       <a href="#dominance">Dominant</a>
       <a href="#punnett">Croisements</a>
       <a href="#sang">Sang</a>
       <a href="#maladies">Maladies</a>
-      <a href="#xlie">X / daltonisme</a>
+      <a href="#xlie">X / Daltonisme</a>
       <a href="#quiz">QCM</a>
     </div>
   </nav>
@@ -433,54 +543,85 @@
 
 <main>
   <section class="hero">
-    <div class="badge">
+    <div class="hero-orbit"></div>
+    <div class="badge-top">
+      <div class="badge-dot"></div>
       <span>Contrôle de science</span>
-      <span>Génétique</span>
+      <span>Génétique humaine</span>
     </div>
-    <h1>Tout ton cours de génétique, optimisé pour ton téléphone.</h1>
+    <h1>Le site de révision <span class="grad">ultra clair</span> pour tout comprendre, débutant comme confirmé.</h1>
     <p>
-      Scrolle simplement du haut vers le bas, lis les résumés, ouvre les réponses
-      et termine par le QCM pour vérifier que tout est bien compris.
+      On part des bases et on monte petit à petit : vocabulaire, dominance, tableaux de croisement,
+      groupes sanguins, maladies génétiques, daltonisme et QCM final.  
+      Tu peux apprendre même si tu es perdu, et vérifier si tu es prêt pour le contrôle.
     </p>
-    <div class="chips">
-      <div class="chip">Lisible sur petit écran</div>
-      <div class="chip">Gros boutons faciles à toucher</div>
-      <div class="chip">Réponses animées</div>
-      <div class="chip">QCM avec score</div>
+    <div class="hero-strip">
+      <div class="hero-chip">📚 Résumés niveau débutant</div>
+      <div class="hero-chip">🧬 Notions vues en classe</div>
+      <div class="hero-chip">🎯 Exemples guidés</div>
+      <div class="hero-chip">✅ QCM interactif avec correction</div>
+    </div>
+
+    <div class="mode-toggle">
+      <span>Mode lecture :</span>
+      <div class="mode-pill">
+        <button class="mode-btn active" data-mode="debutant">Débutant</button>
+        <button class="mode-btn" data-mode="avance">Plus de détails</button>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progress-bar"></div>
     </div>
   </section>
 
-  <!-- Sections: contenu plus simple (reprend le même que la version précédente) -->
   <section id="bases">
-    <div class="card">
-      <h2>1. Les bases</h2>
-      <p>À connaître par cœur.</p>
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">1</div>
+          <h2>Les bases : chromosomes, gènes, allèles</h2>
+        </div>
+        <div class="card-tag">À savoir absolument</div>
+      </div>
+      <p data-detail="debutant">
+        Cette partie te donne le vocabulaire clé qu’on utilise dans tout le chapitre.
+        Si tu comprends ces mots, le reste devient beaucoup plus simple.
+      </p>
+      <p data-detail="avance" style="display:none;">
+        On résume ici la structure de l’information génétique au niveau des chromosomes
+        et de leurs gènes, pour pouvoir ensuite parler de transmission des allèles.
+      </p>
+
       <div class="grid-2">
         <div class="mini-card">
           <div class="tag">Chromosomes</div>
           <p>
-            46 chromosomes = 23 paires dans chaque cellule.  
-            La dernière paire : XX (fille) ou XY (garçon).
+            Dans chaque cellule du corps (sauf les gamètes), il y a
+            <strong>46 chromosomes</strong>, soit 23 paires.  
+            La 23<sup>e</sup> paire détermine le sexe : <strong>XX</strong> (fille) ou <strong>XY</strong> (garçon).
           </p>
         </div>
         <div class="mini-card">
           <div class="tag">Gène</div>
           <p>
-            Petite partie de chromosome qui porte une information (yeux, cheveux, groupe sanguin…).
+            Un gène est un petit morceau de chromosome qui porte une information
+            précise : couleur des yeux, type de cheveux, groupe sanguin, etc.
           </p>
         </div>
         <div class="mini-card">
           <div class="tag">Allèles</div>
           <p>
-            Différentes versions d’un gène.  
-            Exemple : B (brun) / b (bleu) pour la couleur des yeux.
+            Ce sont les différentes versions d’un même gène.  
+            Ex. pour la couleur des yeux : allèle <strong>B</strong> (brun) et allèle
+            <strong>b</strong> (bleu).
           </p>
         </div>
         <div class="mini-card">
-          <div class="tag">Génotype / phénotype</div>
+          <div class="tag">Génotype / Phénotype</div>
           <p>
-            Génotype = lettres (BB, Bb, bb).  
-            Phénotype = ce qu’on voit (yeux bruns, yeux bleus).
+            <strong>Génotype</strong> : les lettres (BB, Bb, bb).  
+            <strong>Phénotype</strong> : ce que l’on voit (yeux bruns ou bleus).
           </p>
         </div>
       </div>
@@ -488,44 +629,68 @@
   </section>
 
   <section id="dominance">
-    <div class="card">
-      <h2>2. Dominant / récessif</h2>
-      <h3>Dominant</h3>
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">2</div>
+          <h2>Dominant / récessif – Homozygote / hétérozygote</h2>
+        </div>
+        <div class="card-tag">Comprendre les lettres</div>
+      </div>
+      <p data-detail="debutant">
+        On utilise des lettres pour représenter les allèles : majuscule pour le dominant,
+        minuscule pour le récessif.
+      </p>
+      <p data-detail="avance" style="display:none;">
+        La dominance signifie qu’un allèle s’exprime au niveau du phénotype même en présence
+        d’un autre allèle différent, tandis que l’allèle récessif ne s’exprime qu’à l’état
+        homozygote.
+      </p>
+      <h3>Dominant / récessif</h3>
       <ul>
-        <li>Lettre majuscule : B, A, D…</li>
-        <li>Suffit d’un seul pour s’exprimer.</li>
-      </ul>
-      <h3>Récessif</h3>
-      <ul>
-        <li>Lettre minuscule : b, a, d…</li>
-        <li>Doit être en double pour se voir (bb).</li>
+        <li><strong>Allèle dominant</strong> : noté en majuscule (B, A, D…). Un seul suffit pour se voir.</li>
+        <li><strong>Allèle récessif</strong> : noté en minuscule (b, a, d…). Il doit être en double pour se voir.</li>
       </ul>
       <h3>Homozygote / hétérozygote</h3>
       <ul>
-        <li>Homozygote : mêmes lettres (BB ou bb).</li>
-        <li>Hétérozygote : lettres différentes (Bb).</li>
+        <li><strong>Homozygote</strong> : deux mêmes lettres (BB ou bb).</li>
+        <li><strong>Hétérozygote</strong> : deux lettres différentes (Bb).</li>
       </ul>
 
       <div class="question-card">
         <div class="question">
-          Un élève a les allèles B et b pour la couleur des yeux.  
+          💡 Un élève a les allèles B et b pour la couleur des yeux.  
           1) Son génotype est-il homozygote ou hétérozygote ?  
-          2) Quelle sera la couleur de ses yeux ?
+          2) Quelle sera la couleur de ses yeux (B dominant, b récessif) ?
         </div>
         <button class="btn-reponse">Afficher la réponse</button>
         <div class="reponse">
-          <p>1) Génotype : Bb → hétérozygote.</p>
-          <p>2) Yeux bruns, car B domine b.</p>
+          <p>1) Génotype <strong>Bb</strong> → il est <strong>hétérozygote</strong>.</p>
+          <p>2) Le phénotype sera <strong>yeux bruns</strong>, car B domine b.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="punnett">
-    <div class="card">
-      <h2>3. Tableaux de croisement</h2>
-      <p>Permettent de voir les probabilités d’enfants différents.</p>
-      <h3>Exemple : deux parents Bb</h3>
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">3</div>
+          <h2>Tableaux de croisement (carrés de Punnett)</h2>
+        </div>
+        <div class="card-tag">Probabilités d’enfants</div>
+      </div>
+      <p data-detail="debutant">
+        Ces tableaux permettent de voir les combinaisons possibles d’allèles chez les enfants.
+      </p>
+      <p data-detail="avance" style="display:none;">
+        On représente les gamètes de chaque parent sur les bords du tableau, et on remplit
+        les cases pour obtenir les génotypes possibles de la descendance, avec leurs
+        probabilités.
+      </p>
+
+      <h3>Exemple : deux parents Bb (yeux bruns hétérozygotes)</h3>
       <div class="punnett">
         <div class="header"></div>
         <div class="header">B</div>
@@ -538,30 +703,48 @@
         <div>bb</div>
       </div>
       <ul>
-        <li>BB : 25&nbsp;% (bruns)</li>
-        <li>Bb : 50&nbsp;% (bruns)</li>
-        <li>bb : 25&nbsp;% (bleus)</li>
+        <li>BB : 25&nbsp;% → yeux bruns</li>
+        <li>Bb : 50&nbsp;% → yeux bruns</li>
+        <li>bb : 25&nbsp;% → yeux bleus</li>
       </ul>
+      <p>
+        ➜ 75&nbsp;% de chances d’avoir un enfant aux yeux bruns,  
+        25&nbsp;% de chances d’avoir un enfant aux yeux bleus.
+      </p>
 
       <div class="question-card">
         <div class="question">
-          Si ce couple a 4 enfants, est-on sûr d’avoir au moins un enfant aux yeux bleus ?
+          🎯 Si ce couple a 4 enfants, est-on certain qu’il y en aura au moins un aux yeux bleus ?
         </div>
         <button class="btn-reponse">Afficher la réponse</button>
         <div class="reponse">
-          <p>Non. 25&nbsp;% = probabilité, pas certitude. Le hasard décide.</p>
+          <p>
+            Non. 25&nbsp;% est une probabilité <strong>en moyenne</strong>.  
+            Le hasard peut donner 0, 1, 2, 3 ou 4 enfants aux yeux bleus.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="sang">
-    <div class="card">
-      <h2>4. Groupes sanguins</h2>
-      <p>
-        Trois allèles : A, B, O.  
-        A et B codominants, O récessif.
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">4</div>
+          <h2>Groupes sanguins ABO & facteur Rhésus</h2>
+        </div>
+        <div class="card-tag">Très fréquent en contrôle</div>
+      </div>
+      <p data-detail="debutant">
+        On regarde d’abord le système ABO (A, B, AB, O), puis le facteur Rh (+ ou −).
       </p>
+      <p data-detail="avance" style="display:none;">
+        Le système ABO repose sur la présence ou l’absence des antigènes A et B à la surface
+        des globules rouges, et sur les anticorps présents dans le plasma.
+      </p>
+
+      <h3>Système ABO</h3>
       <table>
         <tr><th>Groupe</th><th>Génotype(s)</th><th>Antigène(s)</th><th>Anticorps</th></tr>
         <tr><td>A</td><td>AA ou AO</td><td>A</td><td>Anti-B</td></tr>
@@ -570,68 +753,128 @@
         <tr><td>O</td><td>OO</td><td>Aucun</td><td>Anti-A et Anti-B</td></tr>
       </table>
 
-      <h3>Rhésus</h3>
+      <h3>Facteur Rhésus</h3>
       <ul>
-        <li>R = Rh+, dominant.</li>
-        <li>r = Rh−, récessif → il faut rr pour être Rh−.</li>
+        <li>R = Rh+ (dominant) → RR ou Rr.</li>
+        <li>r = Rh− (récessif) → rr uniquement.</li>
       </ul>
 
       <div class="question-card">
         <div class="question">
-          Un père AO et une mère BO peuvent-ils avoir un enfant de groupe O ?
+          💉 Un père AO (groupe A) et une mère BO (groupe B) peuvent-ils avoir un enfant de groupe O ?
         </div>
         <button class="btn-reponse">Afficher la réponse</button>
         <div class="reponse">
-          <p>Oui, possibilité OO → groupe O. Probabilité : 25&nbsp;%.</p>
+          <p>
+            Oui. Croisement AO × BO → possibilités : AB, AO, BO, OO.  
+            L’enfant OO aura le groupe O (probabilité : 25&nbsp;%).
+          </p>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <div class="question">
+          ❌ Un homme AB peut-il être le père d’un enfant de groupe O avec une mère O ?
+        </div>
+        <button class="btn-reponse">Afficher la réponse</button>
+        <div class="reponse">
+          <p>
+            Non. AB donne toujours A ou B, O donne O.  
+            Les enfants possibles : AO (groupe A) ou BO (groupe B).  
+            Il n’y a jamais OO, donc jamais le groupe O.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="maladies">
-    <div class="card">
-      <h2>5. Maladies génétiques</h2>
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">5</div>
+          <h2>Maladies génétiques dominantes et récessives</h2>
+        </div>
+        <div class="card-tag">Exemples classiques</div>
+      </div>
+      <p data-detail="debutant">
+        Une maladie génétique est liée à un gène anormal. Tout dépend si ce gène est dominant ou récessif.
+      </p>
+      <p data-detail="avance" style="display:none;">
+        On distingue les transmissions autosomiques dominantes, autosomiques récessives,
+        et liées aux chromosomes sexuels. Ici, on reste sur les exemples simples vus en classe.
+      </p>
+
       <div class="grid-2">
         <div class="mini-card">
           <div class="tag">Dominantes</div>
-          <p>Un allèle malade suffit (Aa). Exemple : polydactylie.</p>
+          <ul>
+            <li>Un seul allèle malade (Aa) suffit pour être malade.</li>
+            <li>Exemple : polydactylie (doigts en plus).</li>
+          </ul>
         </div>
         <div class="mini-card">
           <div class="tag">Récessives</div>
-          <p>Il faut aa. Exemples : albinisme, certaines surdités.</p>
+          <ul>
+            <li>Il faut deux allèles malades (aa).</li>
+            <li>Exemples : <strong>albinisme</strong>, certaines surdités, mucoviscidose…</li>
+          </ul>
         </div>
       </div>
 
       <div class="question-card">
         <div class="question">
-          Comment s’appelle le manque de mélanine (peau, cheveux très clairs) ?
+          🌞 Sans mélanine, la peau, les cheveux et les poils sont très clairs.  
+          Comment s’appelle cette particularité et le gène est-il dominant ou récessif ?
         </div>
         <button class="btn-reponse">Afficher la réponse</button>
         <div class="reponse">
-          <p>On parle d’<strong>albinisme</strong>, dû à un gène récessif.</p>
+          <p>
+            On parle d’<strong>albinisme</strong>.  
+            Le gène responsable est <strong>récessif</strong> : la personne malade a le génotype aa.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="xlie">
-    <div class="card">
-      <h2>6. Daltonisme (gène sur le X)</h2>
-      <p>
-        XD : normal ; Xd : daltonien (récessif).  
-        Garçon : XDY (normal) ou XdY (daltonien).  
-        Fille : XDXD (normale), XDXd (porteuse), XdXd (daltonienne).
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">6</div>
+          <h2>Gènes liés au X : le cas du daltonisme</h2>
+        </div>
+        <div class="card-tag">Différence garçons / filles</div>
+      </div>
+      <p data-detail="debutant">
+        Chez l’homme, il n’y a qu’un X. Donc s’il est touché, la maladie apparaît directement.
       </p>
+      <p data-detail="avance" style="display:none;">
+        Le daltonisme est souvent une anomalie récessive portée par le chromosome X : les hommes,
+        hémizygotes, l’expriment dès qu’ils héritent d’un allèle muté.
+      </p>
+      <p>
+        On note : <strong>XD</strong> (vision normale) et <strong>Xd</strong> (daltonien, récessif).
+      </p>
+      <ul>
+        <li>Homme normal : XDY.</li>
+        <li>Homme daltonien : XdY.</li>
+        <li>Femme normale : XDXD.</li>
+        <li>Femme porteuse saine : XDXd.</li>
+        <li>Femme daltonienne : XdXd.</li>
+      </ul>
 
       <div class="question-card">
         <div class="question">
-          Pourquoi le daltonisme est-il plus fréquent chez les garçons ?
+          👁️ Pourquoi le daltonisme est-il plus fréquent chez les garçons que chez les filles ?
         </div>
         <button class="btn-reponse">Afficher la réponse</button>
         <div class="reponse">
           <p>
-            Ils n’ont qu’un seul X. S’ils reçoivent Xd, ils sont directement XdY,
-            donc daltoniens.
+            Parce qu’ils n’ont qu’un seul X.  
+            S’ils reçoivent Xd de leur mère, ils sont XdY et donc daltoniens.  
+            Une fille doit recevoir deux Xd (XdXd) pour l’être.
           </p>
         </div>
       </div>
@@ -639,10 +882,17 @@
   </section>
 
   <section id="quiz">
-    <div class="card">
-      <h2>7. QCM</h2>
+    <div class="card" data-level="both">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title-badge">7</div>
+          <h2>QCM final – Es-tu prêt pour le contrôle ?</h2>
+        </div>
+        <div class="card-tag">Corrigé en direct</div>
+      </div>
       <p class="quiz-intro">
-        Choisis une réponse par question puis appuie sur <strong>Voir mon score</strong>.
+        Choisis une réponse par question, puis clique sur <strong>Voir mon score</strong>.  
+        Les bonnes réponses passent en vert, les mauvaises en rouge.
       </p>
       <div id="quiz-questions"></div>
       <div class="quiz-footer">
@@ -650,14 +900,13 @@
         <button class="btn-quiz" id="btn-score">Voir mon score</button>
       </div>
       <p class="footer-note">
-        Quand tu obtiens 100&nbsp%, tu es prêt(e) pour ton contrôle. 📚
+        Si tu refais ce QCM plusieurs fois et que tu arrives à 100&nbsp%, tu as toutes les bases pour réussir ton contrôle. 💪
       </p>
     </div>
   </section>
 </main>
 
 <script>
-  // Apparition des cartes au scroll
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -668,7 +917,6 @@
   },{threshold:0.18});
   document.querySelectorAll('.card').forEach(card=>observer.observe(card));
 
-  // Boutons réponse
   document.querySelectorAll('.btn-reponse').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const rep = btn.nextElementSibling;
@@ -682,16 +930,41 @@
     });
   });
 
-  // QCM
+  const modeButtons = document.querySelectorAll('.mode-btn');
+  modeButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      modeButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.dataset.mode;
+      document.querySelectorAll('[data-detail]').forEach(p=>{
+        const level = p.getAttribute('data-detail');
+        if(mode === 'debutant'){
+          p.style.display = (level === 'debutant') ? 'block' : 'none';
+        }else{
+          p.style.display = (level === 'avance') ? 'block' : 'none';
+        }
+      });
+    });
+  });
+
+  const progressBar = document.getElementById('progress-bar');
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const ratio = docHeight>0 ? scrollTop/docHeight : 0;
+    progressBar.style.width = (10 + ratio*90) + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+
   const quizData = [
     {q:"1. Quel génotype est homozygote récessif ?",options:["BB","Bb","bb","bB"],correct:2},
-    {q:"2. Quel génotype donne des yeux bleus (B dominant, b récessif) ?",options:["BB","Bb","bb","Tous"],correct:2},
-    {q:"3. Un individu de groupe O a le génotype :",options:["AO","BO","AB","OO"],correct:3},
-    {q:"4. Pour le Rh, quel génotype donne Rh− ?",options:["RR","Rr","rr","Rr ou rr"],correct:2},
-    {q:"5. Quel groupe sanguin reçoit de tout le monde (A, B, AB, O) ?",options:["A","B","AB","O"],correct:2},
+    {q:"2. Pour les yeux (B dominant, b récessif), quel génotype donne des yeux bleus ?",options:["BB","Bb","bb","Tous"],correct:2},
+    {q:"3. Un individu de groupe sanguin O a le génotype :",options:["AO","BO","AB","OO"],correct:3},
+    {q:"4. Pour le Rh, quel génotype donne un individu Rh− ?",options:["RR","Rr","rr","Rr ou rr"],correct:2},
+    {q:"5. Quel groupe sanguin peut recevoir du sang de tous les groupes (A, B, AB, O) ?",options:["A","B","AB","O"],correct:2},
     {q:"6. Comment note-t-on un homme daltonien ?",options:["XDXD","XdXd","XdY","XDY"],correct:2},
-    {q:"7. Deux parents Bb × Bb : pourcentage moyen d’enfants bb ?",options:["0 %","25 %","50 %","75 %"],correct:1},
-    {q:"8. L’allèle de l’albinisme est :",options:["dominant","récessif","codominant","lié au Y"],correct:1}
+    {q:"7. Deux parents Bb × Bb : quelle proportion moyenne d’enfants bb ?",options:["0 %","25 %","50 %","75 %"],correct:1},
+    {q:"8. L’allèle responsable de l’albinisme est :",options:["dominant","récessif","codominant","lié au Y"],correct:1}
   ];
 
   const quizContainer = document.getElementById('quiz-questions');
@@ -704,7 +977,6 @@
 
     const opts=document.createElement('div');
     opts.className='quiz-options';
-
     item.options.forEach((opt,oi)=>{
       const btn=document.createElement('div');
       btn.className='quiz-option';
