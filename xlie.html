@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Génétique – Daltonisme et gènes liés au X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-title">GENETIC LAB</div>
+      <div class="brand-sub">Daltonisme</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Menu</a>
+      <a href="sang.html">◀ Sang</a>
+      <a href="quiz.html">QCM ▶</a>
+    </div>
+  </nav>
+</header>
+<div class="layout">
+  <main>
+    <a href="index.html" class="back-link"><span>←</span>Retour au menu</a>
+    <section class="card">
+      <div class="card-header">
+        <h1>5. Gènes liés au X : cas du daltonisme</h1>
+        <div class="card-tag">Différence garçons / filles</div>
+      </div>
+      <p>
+        Certains gènes se trouvent sur le chromosome X. Le daltonisme (vision perturbée des couleurs)
+        est un exemple classique.
+      </p>
+
+      <div class="schema">
+        On note : <strong>XD</strong> (vision normale) et <strong>Xd</strong> (daltonien, récessif).
+      </div>
+
+      <div class="simple-grid" style="margin-top:.5rem;">
+        <article class="mini-card">
+          <div class="mini-title">
+            <span>Garçon</span><span>XY</span>
+          </div>
+          <ul>
+            <li>Normal : <strong>XDY</strong>.</li>
+            <li>Daltonien : <strong>XdY</strong>.</li>
+            <li>Un seul X → si ce X est Xd, il est daltonien.</li>
+          </ul>
+        </article>
+
+        <article class="mini-card">
+          <div class="mini-title">
+            <span>Fille</span><span>XX</span>
+          </div>
+          <ul>
+            <li>Normale : <strong>XDXD</strong>.</li>
+            <li>Porteuse saine : <strong>XDXd</strong>.</li>
+            <li>Daltonienne : <strong>XdXd</strong> (deux Xd).</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-title">Mini questions</div>
+
+        <div class="question-card">
+          <div class="question">
+            1) Pourquoi le daltonisme est‑il plus fréquent chez les garçons ?
+          </div>
+          <button class="btn-reponse">Afficher la réponse</button>
+          <div class="reponse">
+            Parce qu’ils n’ont qu’un seul X (XY). S’ils reçoivent Xd, ils sont XdY
+            et donc daltoniens directement.
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="question">
+            2) Une fille XDXd est‑elle daltonienne ?
+          </div>
+          <button class="btn-reponse">Afficher la réponse</button>
+          <div class="reponse">
+            Non. Elle est porteuse saine : elle voit normalement, mais peut transmettre Xd.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+document.querySelectorAll('.btn-reponse').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const rep = btn.nextElementSibling;
+    const open = rep.classList.contains('show');
+    document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    if(!open){
+      rep.classList.add('show');
+      btn.textContent='Cacher la réponse';
+    }
+  });
+});
+</script>
+</body>
+</html>

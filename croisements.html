@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Génétique – Croisements (Punnett)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-title">GENETIC LAB</div>
+      <div class="brand-sub">Croisements</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Menu</a>
+      <a href="dominance.html">◀ Dominant</a>
+      <a href="sang.html">Sang ▶</a>
+    </div>
+  </nav>
+</header>
+<div class="layout">
+  <main>
+    <a href="index.html" class="back-link"><span>←</span>Retour au menu</a>
+    <section class="card">
+      <div class="card-header">
+        <h1>3. Tableaux de croisement (carrés de Punnett)</h1>
+        <div class="card-tag">Voir les probabilités</div>
+      </div>
+      <p>
+        Les tableaux de croisement te montrent les combinaisons possibles d’allèles chez les enfants.
+        On y lit les pourcentages de chaque génotype.
+      </p>
+
+      <div class="schema">
+        Étapes :
+        <ol style="margin-left:1.1rem;margin-top:.3rem;font-size:.86rem;color:var(--muted);">
+          <li>Écris les deux allèles du parent 1 sur le côté.</li>
+          <li>Écris les deux allèles du parent 2 en haut.</li>
+          <li>Remplis les cases : on “descend” et on “traverse” les lettres.</li>
+        </ol>
+      </div>
+
+      <div class="simple-grid" style="margin-top:.6rem;">
+        <article class="mini-card">
+          <div class="mini-title">
+            <span>Exemple</span><span>Bb × Bb</span>
+          </div>
+          <p style="font-size:.86rem;color:var(--muted);margin-bottom:.25rem;">
+            Deux parents aux yeux bruns mais porteurs de b (B = brun, b = bleu).
+          </p>
+          <div class="punnett">
+            <div class="header"></div>
+            <div class="header">B</div>
+            <div class="header">b</div>
+            <div class="header">B</div>
+            <div>BB</div>
+            <div>Bb</div>
+            <div class="header">b</div>
+            <div>Bb</div>
+            <div>bb</div>
+          </div>
+          <ul style="margin-top:.25rem;">
+            <li>BB : 25&nbsp;% → yeux bruns</li>
+            <li>Bb : 50&nbsp;% → yeux bruns</li>
+            <li>bb : 25&nbsp;% → yeux bleus</li>
+          </ul>
+        </article>
+
+        <article class="mini-card">
+          <div class="mini-title">
+            <span>À retenir</span><span>important</span>
+          </div>
+          <ul>
+            <li>75&nbsp;% d’enfants bruns en moyenne.</li>
+            <li>25&nbsp;% d’enfants aux yeux bleus.</li>
+            <li>⚠️ Ce sont des <strong>probabilités</strong>, pas une obligation.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="qa-block">
+        <div class="qa-title">Mini questions</div>
+
+        <div class="question-card">
+          <div class="question">
+            1) Dans le croisement Bb × Bb, quelle proportion moyenne d’enfants bb ?
+          </div>
+          <button class="btn-reponse">Afficher la réponse</button>
+          <div class="reponse">
+            Environ 25&nbsp;% des enfants seront bb (yeux bleus).
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="question">
+            2) Si ce couple a 4 enfants, est‑on certain qu’il y aura exactement 3 bruns et 1 bleu ?
+          </div>
+          <button class="btn-reponse">Afficher la réponse</button>
+          <div class="reponse">
+            Non, ce sont des probabilités. En réalité, on peut avoir 4 bruns, 2 bruns / 2 bleus, etc.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+document.querySelectorAll('.btn-reponse').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const rep = btn.nextElementSibling;
+    const open = rep.classList.contains('show');
+    document.querySelectorAll('.reponse').forEach(r=>r.classList.remove('show'));
+    document.querySelectorAll('.btn-reponse').forEach(b=>b.textContent='Afficher la réponse');
+    if(!open){
+      rep.classList.add('show');
+      btn.textContent='Cacher la réponse';
+    }
+  });
+});
+</script>
+</body>
+</html>
